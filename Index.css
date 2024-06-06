@@ -5,27 +5,21 @@
     font-family: sans-serif;
 }
 
-.formcontainer {
-    margin: auto; 
-    text-align: center;
-    width: 40%;
-    position: relative;
+form{
+    display: flex;
+    justify-content: center;
+    margin: 20px;
 }
-@media (max-width: 800px) {
-    .formcontainer {
-        width: 80%;
-    }
+.divform{
+    width: 50vh;
 }
-
 
 .login-gif {
-    width: 100%; 
     max-width: 200px; 
 }
 
 .btn-login{
     background-color: #1FD5CA;
-    margin-top: 20px;
     margin-bottom: 20px;
     width: 100%;
     transition: .2s;   
