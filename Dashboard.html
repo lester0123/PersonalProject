@@ -1,15 +1,12 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="Dashboard.css">
-
+    <title>Convert API snippet</title>
 </head>
 <body>
-    <div>
-    <label style="font-size: 2rem;">EUT KA SAKIN MAMAYA</label>
-    </div>
+    <form action="https://v2.convertapi.com/convert/docx/to/pdf?Secret=ioJr8bZe4Qwhd52Y&download=attachment" method="post" enctype="multipart/form-data">
+        <input type="file" name="File" />
+        <input type="submit" value="Convert file"/>
+    </form>
 </body>
 </html>
