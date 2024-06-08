@@ -69,3 +69,9 @@ form{
     .boximage{
         width: 10vh;
     }
+
+    .swal2-confirm {
+        background-color: #1FD5CA !important;
+        border: none !important;
+
+    }

@@ -10,6 +10,8 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
         crossorigin="anonymous"></script>
+    <script type="module" src="./FirebaseConfig.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <link rel="stylesheet" href="Index.css">
 </head>
 
@@ -17,7 +19,7 @@
     <form action="loginform">
         <div class="divform">
             <div style="text-align: center;">
-                <img class="login-gif" src="login.gif" alt="login-gif">
+                <img class="login-gif" src="/images/login.gif" alt="login-gif">
             </div>
             <div class="form-floating mb-3">
                 <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com">
@@ -27,7 +29,7 @@
                 <input type="password" class="form-control" id="floatingPassword" placeholder="Password">
                 <label for="floatingPassword">Password</label>
             </div>
-            <button class="btn-login">LOGIN</button>
+            <button class="btn-login" Id="btnlogin" type="button">LOGIN</button>
 
             <label style="margin-bottom: 30px;">Don't have an account? <a href="SignUp"
                     style="color: #1FD5CA;">SignUp</a>
@@ -36,12 +38,12 @@
             <div>
                 <div style="text-align:center">
                     <Label class="contactuslabel">CONTACT US</Label>
-                    <img src="box.png" alt="" class="boximage">
+                    <img src="/images/box.png" alt="" class="boximage">
                 </div>
                 <div class="socialmedia">
-                    <a><img src="facebook-messenger.png" alt=""></a>
-                    <a><img src="twitter.png" alt=""></a>
-                    <a><img src="facebook.png" alt=""></a>
+                    <a><img src="/images/facebook-messenger.png" alt=""></a>
+                    <a><img src="/images/twitter.png" alt=""></a>
+                    <a><img src="/images/facebook.png" alt=""></a>
                 </div>
             </div>
         </div>
@@ -50,6 +52,62 @@
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <script src="/bootstrap/js/bootstrap.min.js"></script>
     <script src="/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+    <script type="module">
+            import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+            import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-analytics.js";
+            import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+            import { getFirestore, collection, getDocs, query, where } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+            import { firebaseConfig } from './firebaseConfig.js'; // Import the config
+
+            // Initialize Firebase
+            const app = initializeApp(firebaseConfig);
+            const analytics = getAnalytics(app);
+            const db = getFirestore(app);
+            const auth = getAuth(app);
+
+            // Event listener for the login button
+            document.getElementById('btnlogin').addEventListener('click', async (e) => {
+                const email = document.getElementById('floatingInput').value;
+                const password = document.getElementById('floatingPassword').value;
+
+                if (!email) {
+                    Swal.fire('Error', 'Email cannot be empty', 'error');
+                    return;
+                }
+                if (!password) {
+                    Swal.fire('Error', 'Password cannot be empty', 'error');
+                    return;
+                }
+                try {
+                    const userCredential = await signInWithEmailAndPassword(auth, email, password);
+                    const user = userCredential.user;
+                    Swal.fire({
+                        title: 'Success',
+                        text: 'Login successful! Redirecting to dashboard...',
+                        icon: 'success',
+                        customClass: {
+                            confirmButton: 'swal2-confirm'
+                        },
+                        timer: 1500, // Display the alert for 1.5 seconds
+                        showConfirmButton: false,
+                        willClose: () => {
+                            window.location.href = 'Dashboard.html'; // Redirect to dashboard
+                        }
+                    });
+                } catch (error) {
+                    console.error('Error logging in: ', error);
+                    Swal.fire({
+                        title: 'Error',
+                        text: 'Error logging in: ' + error.message,
+                        icon: 'error',
+                        customClass: {
+                            confirmButton: 'swal2-confirm'
+                        }
+                    });
+                }
+            });
+    </script>
 </body>
 
 </html>
