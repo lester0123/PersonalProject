@@ -1,12 +1,75 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Convert API snippet</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>File Converter</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f4f4f4;
+        }
+        .container {
+            width: 500px;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            background-color: #fff;
+            border-color:#1FD5CA;
+        }
+        .container h2 {
+            margin-top: 0;
+            font-size: 24px;
+            text-align: center;
+        }
+        .form-group {
+            margin-bottom: 20px;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        .form-group input[type="file"] {
+            width: 100%;
+            padding: 10px;
+            border-radius: 5px;
+        }
+        .form-group input[type="submit"] {
+            width: 100%;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            background-color: #1FD5CA;
+            color: #fff;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        .form-group input[type="submit"]:hover {
+            background-color: #1FD5CA;
+        }
+
+    </style>
 </head>
-<body>
-    <form action="https://v2.convertapi.com/convert/docx/to/pdf?Secret=ioJr8bZe4Qwhd52Y&download=attachment" method="post" enctype="multipart/form-data">
-        <input type="file" name="File" />
-        <input type="submit" value="Convert file"/>
-    </form>
+<body>  
+    <div class="container">
+        <h2>File Converter</h2>
+        <form action="https://v2.convertapi.com/convert/docx/to/pdf?Secret=ioJr8bZe4Qwhd52Y&download=attachment" method="post" enctype="multipart/form-data" class="form-group">
+            <label for="wordToPdf">Word to PDF</label>
+            <input type="file" name="File" id="wordToPdf" accept=".docx" required>
+            <input class="button" type="submit" value="Convert to PDF">
+        </form>
+        <form action="https://v2.convertapi.com/convert/pdf/to/docx?Secret=ioJr8bZe4Qwhd52Y&download=attachment" method="post" enctype="multipart/form-data" class="form-group">
+            <label for="pdfToWord">PDF to Word</label>
+            <input type="file" name="File" id="pdfToWord" accept=".pdf" required>
+            <input class="button" type="submit" value="Convert to Word">
+        </form>
+    </div>
 </body>
 </html>
