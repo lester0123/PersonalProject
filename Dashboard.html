@@ -54,7 +54,16 @@
         .form-group input[type="submit"]:hover {
             background-color: #1FD5CA;
         }
-
+.logout{
+    background-color: #1FD5CA;
+border: none;
+border-radius: 10px;
+font-size: 1.5rem;
+padding: 1rem;
+color: white;
+font-family: Arial, sans-serif;
+cursor: pointer;
+}
     </style>
 </head>
 <body>  
@@ -71,5 +80,26 @@
             <input class="button" type="submit" value="Convert to Word">
         </form>
     </div>
+    <div style="position: absolute; top: 10px; right: 10px;">
+        <button class="logout" id="logoutBtn">Logout</button>
+    </div>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            // Check if user session exists in sessionStorage
+            const user = sessionStorage.getItem('user');
+            if (!user) {
+                // Redirect to index.html if user session not found
+                window.location.href = 'index.html';
+            }
+
+            // Add event listener for logout button
+            document.getElementById('logoutBtn').addEventListener('click', function() {
+                // Clear user session from sessionStorage
+                sessionStorage.removeItem('user');
+                // Redirect to index.html after logout
+                window.location.href = 'index.html';
+            });
+        });
+    </script>
 </body>
 </html>

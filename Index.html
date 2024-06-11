@@ -73,6 +73,8 @@
                 try {
                     const userCredential = await signInWithEmailAndPassword(auth, email, password);
                     const user = userCredential.user;
+                    sessionStorage.setItem('user', JSON.stringify(user));
+
                     Swal.fire({
                         title: 'Success',
                         text: 'Login successful! Redirecting to dashboard...',
