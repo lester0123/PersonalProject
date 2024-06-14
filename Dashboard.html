@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -15,32 +16,38 @@
             height: 100vh;
             background-color: #f4f4f4;
         }
+
         .container {
             width: 500px;
             padding: 20px;
             border: 1px solid #ccc;
             border-radius: 5px;
             background-color: #fff;
-            border-color:#1FD5CA;
+            border-color: #1FD5CA;
         }
+
         .container h2 {
             margin-top: 0;
             font-size: 24px;
             text-align: center;
         }
+
         .form-group {
             margin-bottom: 20px;
         }
+
         .form-group label {
             display: block;
             margin-bottom: 5px;
             font-weight: bold;
         }
+
         .form-group input[type="file"] {
             width: 100%;
             padding: 10px;
             border-radius: 5px;
         }
+
         .form-group input[type="submit"] {
             width: 100%;
             padding: 10px;
@@ -51,30 +58,35 @@
             font-size: 16px;
             cursor: pointer;
         }
+
         .form-group input[type="submit"]:hover {
             background-color: #1FD5CA;
         }
-.logout{
-    background-color: #1FD5CA;
-border: none;
-border-radius: 10px;
-font-size: 1.5rem;
-padding: 1rem;
-color: white;
-font-family: Arial, sans-serif;
-cursor: pointer;
-}
+
+        .logout {
+            background-color: #1FD5CA;
+            border: none;
+            border-radius: 10px;
+            font-size: 1.5rem;
+            padding: 1rem;
+            color: white;
+            font-family: Arial, sans-serif;
+            cursor: pointer;
+        }
     </style>
 </head>
-<body>  
+
+<body>
     <div class="container">
         <h2>File Converter</h2>
-        <form action="https://v2.convertapi.com/convert/docx/to/pdf?Secret=ioJr8bZe4Qwhd52Y&download=attachment" method="post" enctype="multipart/form-data" class="form-group">
+        <form action="https://v2.convertapi.com/convert/docx/to/pdf?Secret=ioJr8bZe4Qwhd52Y&download=attachment"
+            method="post" enctype="multipart/form-data" class="form-group">
             <label for="wordToPdf">Word to PDF</label>
             <input type="file" name="File" id="wordToPdf" accept=".docx" required>
             <input class="button" type="submit" value="Convert to PDF">
         </form>
-        <form action="https://v2.convertapi.com/convert/pdf/to/docx?Secret=ioJr8bZe4Qwhd52Y&download=attachment" method="post" enctype="multipart/form-data" class="form-group">
+        <form action="https://v2.convertapi.com/convert/pdf/to/docx?Secret=ioJr8bZe4Qwhd52Y&download=attachment"
+            method="post" enctype="multipart/form-data" class="form-group">
             <label for="pdfToWord">PDF to Word</label>
             <input type="file" name="File" id="pdfToWord" accept=".pdf" required>
             <input class="button" type="submit" value="Convert to Word">
@@ -84,22 +96,23 @@ cursor: pointer;
         <button class="logout" id="logoutBtn">Logout</button>
     </div>
     <script>
-        document.addEventListener("DOMContentLoaded", function() {
+        document.addEventListener("DOMContentLoaded", function () {
             // Check if user session exists in sessionStorage
             const user = sessionStorage.getItem('user');
             if (!user) {
                 // Redirect to index.html if user session not found
-                window.location.href = 'Index';
+                window.location.href = 'Index.html';
             }
 
             // Add event listener for logout button
-            document.getElementById('logoutBtn').addEventListener('click', function() {
+            document.getElementById('logoutBtn').addEventListener('click', function () {
                 // Clear user session from sessionStorage
                 sessionStorage.removeItem('user');
                 // Redirect to index.html after logout
-                window.location.href = 'Index';
+                window.location.href = 'Index.html';
             });
         });
     </script>
 </body>
+
 </html>
