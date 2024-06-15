@@ -24,6 +24,7 @@
             border-radius: 5px;
             background-color: #fff;
             border-color: #1FD5CA;
+            box-sizing: border-box;
         }
 
         .container h2 {
@@ -42,21 +43,22 @@
             font-weight: bold;
         }
 
-        .form-group input[type="file"] {
-            width: 100%;
-            padding: 10px;
-            border-radius: 5px;
-        }
-
+        .form-group input[type="file"],
+        .form-group input[type="text"],
         .form-group input[type="submit"] {
             width: 100%;
             padding: 10px;
-            border: none;
             border-radius: 5px;
+            box-sizing: border-box;
+        }
+
+        .form-group input[type="submit"] {
+            border: none;
             background-color: #1FD5CA;
             color: #fff;
             font-size: 16px;
             cursor: pointer;
+            margin-top: .5rem;
         }
 
         .form-group input[type="submit"]:hover {
@@ -73,24 +75,50 @@
             font-family: Arial, sans-serif;
             cursor: pointer;
         }
+
+        .qr-code,
+        .barcode {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .qr-code img,
+        .barcode img {
+            max-width: 100%;
+            height: auto;
+        }
     </style>
 </head>
 
 <body>
     <div class="container">
         <h2>File Converter</h2>
-        <form action="https://v2.convertapi.com/convert/docx/to/pdf?Secret=ioJr8bZe4Qwhd52Y&download=attachment"
-            method="post" enctype="multipart/form-data" class="form-group">
+        <form action="https://v2.convertapi.com/convert/docx/to/pdf?Secret=ioJr8bZe4Qwhd52Y&download=attachment" method="post" enctype="multipart/form-data" class="form-group">
             <label for="wordToPdf">Word to PDF</label>
             <input type="file" name="File" id="wordToPdf" accept=".docx" required>
             <input class="button" type="submit" value="Convert to PDF">
         </form>
-        <form action="https://v2.convertapi.com/convert/pdf/to/docx?Secret=ioJr8bZe4Qwhd52Y&download=attachment"
-            method="post" enctype="multipart/form-data" class="form-group">
+        <form action="https://v2.convertapi.com/convert/pdf/to/docx?Secret=ioJr8bZe4Qwhd52Y&download=attachment" method="post" enctype="multipart/form-data" class="form-group">
             <label for="pdfToWord">PDF to Word</label>
             <input type="file" name="File" id="pdfToWord" accept=".pdf" required>
             <input class="button" type="submit" value="Convert to Word">
         </form>
+
+        <form id="qrCodeForm" class="form-group">
+            <label for="qrCodeText">Generate QR Code</label>
+            <input type="text" name="data" id="qrCodeText" placeholder="Enter text or URL" required>
+            <input class="button" type="submit" value="Generate QR Code">
+        </form>
+        <div class="qr-code" id="qrCodeContainer"></div>
+
+        <form id="barcodeForm" class="form-group">
+            <label for="barcodeText">Generate Barcode</label>
+            <input type="text" name="data" id="barcodeText" placeholder="Enter text or number" required>
+            <input type="hidden" name="code" value="Code128">
+            <input class="button" type="submit" value="Generate Barcode">
+        </form>
+        <div class="barcode" id="barcodeContainer"></div>
+        
     </div>
     <div style="position: absolute; top: 10px; right: 10px;">
         <button class="logout" id="logoutBtn">Logout</button>
@@ -110,6 +138,24 @@
                 sessionStorage.removeItem('user');
                 // Redirect to index.html after logout
                 window.location.href = 'Index.html';
+            });
+
+            // Add event listener for QR code form submission
+            document.getElementById('qrCodeForm').addEventListener('submit', function (event) {
+                event.preventDefault();
+                const qrCodeText = document.getElementById('qrCodeText').value;
+                const qrCodeUrl = `https://api.qrserver.com/v1/create-qr-code/?data=${encodeURIComponent(qrCodeText)}`;
+                const qrCodeContainer = document.getElementById('qrCodeContainer');
+                qrCodeContainer.innerHTML = `<img src="${qrCodeUrl}" alt="QR Code">`;
+            });
+
+            // Add event listener for barcode form submission
+            document.getElementById('barcodeForm').addEventListener('submit', function (event) {
+                event.preventDefault();
+                const barcodeText = document.getElementById('barcodeText').value;
+                const barcodeUrl = `https://barcode.tec-it.com/barcode.ashx?data=${encodeURIComponent(barcodeText)}&code=Code128`;
+                const barcodeContainer = document.getElementById('barcodeContainer');
+                barcodeContainer.innerHTML = `<img src="${barcodeUrl}" alt="Barcode">`;
             });
         });
     </script>
