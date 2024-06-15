@@ -25,6 +25,7 @@
             background-color: #fff;
             border-color: #1FD5CA;
             box-sizing: border-box;
+            margin: 1.5rem;
         }
 
         .container h2 {
@@ -91,6 +92,9 @@
 </head>
 
 <body>
+    <div style="position: absolute; top: 10px; right: 10px;">
+        <button class="logout" id="logoutBtn">Logout</button>
+    </div>
     <div class="container">
         <h2>File Converter</h2>
         <form action="https://v2.convertapi.com/convert/docx/to/pdf?Secret=ioJr8bZe4Qwhd52Y&download=attachment" method="post" enctype="multipart/form-data" class="form-group">
@@ -121,9 +125,7 @@
         <div class="barcode" id="barcodeContainer"></div>
         
     </div>
-    <div style="position: absolute; top: 10px; right: 10px;">
-        <button class="logout" id="logoutBtn">Logout</button>
-    </div>
+
     <script>
         document.addEventListener("DOMContentLoaded", function () {
             // Check if user session exists in sessionStorage
