@@ -104,15 +104,16 @@
             <input class="button" type="submit" value="Convert to Word">
         </form>
 
+        <h2 style="margin-top: 4rem;">Generate QR Code / BAR Code</h2>
         <form id="qrCodeForm" class="form-group">
-            <label for="qrCodeText">Generate QR Code</label>
+            <label for="qrCodeText">QR Code</label>
             <input type="text" name="data" id="qrCodeText" placeholder="Enter text or URL" required>
             <input class="button" type="submit" value="Generate QR Code">
         </form>
         <div class="qr-code" id="qrCodeContainer"></div>
 
         <form id="barcodeForm" class="form-group">
-            <label for="barcodeText">Generate Barcode</label>
+            <label for="barcodeText">Bar Code</label>
             <input type="text" name="data" id="barcodeText" placeholder="Enter text or number" required>
             <input type="hidden" name="code" value="Code128">
             <input class="button" type="submit" value="Generate Barcode">
